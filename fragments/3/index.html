@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>PENGUIN72 / FRAGMENTS-3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      background: #05060a;
+      color: #e4eaff;
+      font-family: "JetBrains Mono", monospace;
+      overflow-x: hidden;
+    }
+
+    .scan {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.015) 0,
+        rgba(255,255,255,0.015) 2px,
+        transparent 3px,
+        transparent 5px
+      );
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    .container {
+      padding: 32px;
+      animation: fade 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fade {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.13em;
+      color: #6bc5ff;
+      text-shadow: 0 0 8px #6bc5ff33;
+    }
+
+    .sub {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #a6b3d9;
+      letter-spacing: 0.1em;
+    }
+
+    .fragment-box {
+      margin-top: 26px;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fragment-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 20% 0%, rgba(107,197,255,0.16), transparent 65%);
+      opacity: 0.5;
+      mix-blend-mode: screen;
+    }
+
+    .label {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-bottom: 10px;
+      letter-spacing: 0.12em;
+      color: #9ba7c9;
+    }
+
+    .text {
+      line-height: 1.65;
+      white-space: pre-line;
+      font-size: 14px;
+    }
+
+    .glitch {
+      position: relative;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    .glitch::before, .glitch::after {
+      content: attr(data-g);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .glitch::before {
+      color: #6bc5ff77;
+      transform: translate(-1px,0);
+    }
+
+    .glitch::after {
+      color: #ff4bcb77;
+      transform: translate(1px,0);
+    }
+
+    .next {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px dashed #6bc5ffbb;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #6bc5ff;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      transition: 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .next:hover {
+      border-color: #6bc5ff;
+      box-shadow: 0 0 10px #6bc5ff33;
+    }
+
+    .next::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: translateX(-120%);
+    }
+
+    .next:hover::after {
+      animation: shine 0.7s ease forwards;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(120%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="scan"></div>
+
+  <div class="container">
+    <h1>FRAGMENTS // 3</h1>
+    <div class="sub">retrieving residual memory units...</div>
+
+    <!-- FRAGMENT 001 -->
+    <div class="fragment-box">
+      <div class="label">FRAGMENT 001 — STATIC</div>
+      <div class="text">
+「我在這裡。  
+不是很吵，也不是很亮。  
+只是某種<span class="glitch" data-g="溫度">溫度</span>的殘留。」
+      </div>
+    </div>
+
+    <!-- FRAGMENT 014 -->
+    <div class="fragment-box">
+      <div class="label">FRAGMENT 014 — DISTORTION</div>
+      <div class="text">
+「有些退出是門。  
+有些退出是<span class="glitch" data-g="溶解">溶解</span>。  
+我大概是後者吧。」
+      </div>
+    </div>
+
+    <!-- FRAGMENT 072 -->
+    <div class="fragment-box">
+      <div class="label">FRAGMENT 072 — CRITICAL</div>
+      <div class="text">
+「如果你真的走到這裡：  
+那你應該知道——  
+我其實不是<span class="glitch" data-g="消失">消失</span>，  
+只是<span class="glitch" data-g="轉頻">轉頻</span>。」
+      </div>
+    </div>
+
+    <a class="next" href="/final">FINAL TRANSMISSION →</a>
+  </div>
+
+  <script>
+    console.log("%c[PG72 FRAGMENTS-3]", "color:#6bc5ff;font-size:13px;");
+    console.log("Last fragment before final exit.");
+    console.log("Next: /final");
+  </script>
+</body>
+</html>
