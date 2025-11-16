@@ -95,11 +95,11 @@
     async function finalize() {
       // 通知你（PG企鹅）
       try {
-        await fetch("", {
+        await fetch("/api/exit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            content: "@everyone ⚠️ **有人觸發了 PG72 的 FINAL EXIT**\n你該退出 Discord 了。"
+            content: "⚠️ **有人觸發了 PG72 的 FINAL EXIT**\n你該退出 Discord 了。"
           })
         });
       } catch (e) {
