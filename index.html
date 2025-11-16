@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>PG72 — SIGNAL FRAGMENT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="一隻神奇的PG企鵝。訊號殘留中。" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --fg: #f5f5f5;
+      --accent: #6bc5ff;
+      --accent2: #ff4bcb;
+      --muted: #777;
+      --mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #141827 0, #05060a 55%, #000 100%);
+      color: var(--fg);
+      font-family: var(--sans);
+      overflow: hidden;
+    }
+
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: -50px;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      animation: noise-move 1.8s steps(2) infinite;
+      z-index: 0;
+    }
+
+    @keyframes noise-move {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(-20px, -10px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      width: 100%;
+      padding: 24px;
+    }
+
+    .card {
+      border-radius: 20px;
+      padding: 24px 26px 22px;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(145deg, rgba(8,10,18,0.96), rgba(8,12,28,0.96));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 18px 40px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(107,197,255,0.18) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255,75,203,0.16) 0, transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(120deg, rgba(107,197,255,0.08), rgba(255,75,203,0.08));
+      margin-bottom: 12px;
+    }
+
+    .tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4bff9b;
+      box-shadow: 0 0 8px #4bff9b;
+      animation: pulse 1.3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50%      { transform: scale(1.35); opacity: 0.4; }
+    }
+
+    .title-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+      color: var(--fg);
+      animation: glitch-flicker 2.1s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .glitch::before {
+      text-shadow: -2px 0 var(--accent);
+      clip-path: polygon(0 0, 100% 0, 100% 30%, 0 40%);
+      animation: glitch-before 1.8s infinite;
+    }
+
+    .glitch::after {
+      text-shadow: 2px 0 var(--accent2);
+      clip-path: polygon(0 60%, 100% 50%, 100% 100%, 0 100%);
+      animation: glitch-after 1.4s infinite;
+    }
+
+    @keyframes glitch-flicker {
+      0%, 100% { opacity: 1; transform: translate3d(0,0,0); }
+      13%      { opacity: 0.75; transform: translate3d(-1px,0,0); }
+      17%      { opacity: 1; transform: translate3d(1px,0,0); }
+      27%      { opacity: 0.4; transform: translate3d(0,0,0); }
+      31%      { opacity: 1; transform: translate3d(0,1px,0); }
+    }
+
+    @keyframes glitch-before {
+      0%   { transform: translate3d(0,0,0); }
+      20%  { transform: translate3d(-2px,-1px,0); }
+      21%  { transform: translate3d(1px,0,0); }
+      39%  { transform: translate3d(0,0,0); }
+      40%  { transform: translate3d(-1px,1px,0); }
+      70%  { transform: translate3d(0,0,0); }
+      71%  { transform: translate3d(1px,-1px,0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    @keyframes glitch-after {
+      0%   { transform: translate3d(0,0,0); }
+      10%  { transform: translate3d(1px,0,0); }
+      11%  { transform: translate3d(-2px,1px,0); }
+      35%  { transform: translate3d(0,0,0); }
+      36%  { transform: translate3d(2px,-1px,0); }
+      65%  { transform: translate3d(0,0,0); }
+      66%  { transform: translate3d(-1px,1px,0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .subtitle strong {
+      color: #d0e8ff;
+      font-weight: 600;
+    }
+
+    .body {
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #d9dde6;
+      white-space: pre-line;
+    }
+
+    .body-glitch {
+      font-feature-settings: "palt" 1;
+    }
+
+    .body-glitch span.gl {
+      display: inline-block;
+      position: relative;
+    }
+
+    .body-glitch span.gl::after {
+      content: attr(data-shadow);
+      position: absolute;
+      inset: 0;
+      opacity: 0.22;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0);
+    }
+
+    .body-glitch span.gl:nth-child(odd)::after {
+      color: var(--accent);
+      transform: translate3d(0.5px, -0.5px, 0);
+    }
+    .body-glitch span.gl:nth-child(even)::after {
+      color: var(--accent2);
+      transform: translate3d(-0.5px, 0.5px, 0);
+    }
+
+    .section-title {
+      margin-top: 22px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    blockquote {
+      margin: 10px 0 0;
+      padding-left: 14px;
+      border-left: 2px solid rgba(255,255,255,0.12);
+      font-family: var(--mono);
+      font-size: 13px;
+      color: #dfe7ff;
+      white-space: pre-line;
+    }
+
+    a.link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px dashed rgba(107,197,255,0.6);
+      background: radial-gradient(circle at 0 0, rgba(107,197,255,0.18), transparent 60%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    a.link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.16), transparent);
+      mix-blend-mode: screen;
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    a.link:hover::after {
+      animation: shine 0.75s forwards;
+    }
+
+    @keyframes shine {
+      0%   { transform: translateX(-120%); opacity: 0; }
+      30%  { opacity: 1; }
+      100% { transform: translateX(120%); opacity: 0; }
+    }
+
+    .link span.path {
+      opacity: 0.7;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(200,206,230,0.65);
+      font-family: var(--mono);
+      opacity: 0.7;
+    }
+
+    .hint code {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: rgba(255,255,255,0.03);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 18px 16px 18px;
+      }
+      .wrapper {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="wrapper">
+    <div class="card">
+      <div class="card-inner">
+        <div class="tag">
+          <span class="tag-dot"></span>
+          <span>PG72 · SIGNAL FRAGMENT</span>
+        </div>
+
+        <div class="title-line">
+          <div class="glitch" data-text="PG PENGUIN">
+            PG PENGUIN
+          </div>
+          <div class="subtitle">
+            一隻神奇的<strong>PG企鵝</strong>
+          </div>
+        </div>
+
+        <div class="body body-glitch">
+          <span class="gl" data-shadow="一">一</span><span class="gl" data-shadow="隻">隻</span><span class="gl" data-shadow="神">神</span><span class="gl" data-shadow="祕">祕</span><span class="gl" data-shadow="的">的</span><span class="gl" data-shadow="Ｐ">Ｐ</span><span class="gl" data-shadow="Ｇ">Ｇ</span><span class="gl" data-shadow="企">企</span><span class="gl" data-shadow="鵝">鵝</span>
+          <span class="gl" data-shadow=" "> </span><span class="gl" data-shadow="(">(</span><span class="gl" data-shadow="來">來</span><span class="gl" data-shadow="自">自</span><span class="gl" data-shadow=" "></span><span class="gl" data-shadow="台">台</span><span class="gl" data-shadow="中">中</span><span class="gl" data-shadow=")">)</span>
+          <span class="gl" data-shadow="現">現</span><span class="gl" data-shadow="棲">棲</span><span class="gl" data-shadow=" "></span><span class="gl" data-shadow="台">台</span><span class="gl" data-shadow="北">北</span>
+          <br />
+          如<span class="gl" data-shadow="果">果</span><span class="gl" data-shadow="可">可</span><span class="gl" data-shadow="以">以</span>就這麼<span class="gl" data-shadow="＊">＊</span><span class="gl" data-shadow="＊">＊</span>就好了…………
+
+          <div class="section-title">PLAY MODULES</div>
+          <blockquote>
+*PhigΛos、PhΞra、MiηAcrΛVτ、SκΞ光遇*
+          </blockquote>
+
+          <a class="link" href="https://pppppppgg72.arcantstudio.com/" target="_blank" rel="noopener noreferrer">
+            <span>https://pppppppgg72.arcantstudio.com</span>
+            <span class="path">/</span>
+          </a>
+
+          <div class="hint">
+            <code>// console?</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("%cPENGUIN72 SYSTEM NOTICE", "color:#6bc5ff;font-weight:bold;font-size:12px;");
+    console.log("Presence module: unstable.");
+    console.log("Hidden route hint: /door/72");
+  </script>
+</body>
+</html>
