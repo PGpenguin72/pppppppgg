@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>PENGUIN72 / SYSTEM LOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #05060a;
+      color: #d9e2ff;
+      font-family: "JetBrains Mono", monospace;
+      overflow: hidden;
+    }
+
+    .scanline {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0,
+        rgba(255,255,255,0.02) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    .container {
+      position: relative;
+      padding: 32px;
+      z-index: 1;
+      animation: fadein 1.6s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadein {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: 0.18em;
+      color: #6bc5ff;
+      text-shadow: 0 0 8px #6bc5ff55;
+    }
+
+    .logbox {
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-line;
+      position: relative;
+    }
+
+    .error {
+      color: #ff4bcb;
+      font-weight: 600;
+    }
+    .ok {
+      color: #4bff9b;
+      font-weight: 600;
+    }
+    .warn {
+      color: #ffe066;
+      font-weight: 600;
+    }
+
+    .next {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px dashed #6bc5ffcc;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #6bc5ff;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      transition: all 0.2s;
+      opacity: 0.8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .next:hover {
+      opacity: 1;
+      border-color: #6bc5ff;
+      box-shadow: 0 0 10px #6bc5ff33;
+    }
+
+    .next::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: translateX(-120%);
+    }
+
+    .next:hover::after {
+      animation: shine 0.7s ease forwards;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(120%); }
+    }
+
+    /* glitch text */
+    .gl {
+      position: relative;
+      display: inline-block;
+    }
+
+    .gl::after {
+      content: attr(data-g);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #ff4bcb99;
+      transform: translate(1px, 0);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .gl::before {
+      content: attr(data-g);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #6bc5ff99;
+      transform: translate(-1px, 0);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <div class="container">
+    <h1>PENGUIN72 // SYSTEM LOG</h1>
+
+    <div class="logbox">
+
+[BOOT SEQUENCE CHECK]
+
+LANGUAGE MODULE.................<span class="ok">OK</span>  
+MEMORY ARCHIVE..................<span class="ok">OK</span>  
+IDENTITY ANCHOR.................<span class="warn">UNSTABLE</span>  
+PRESENCE MODULE.................<span class="error">FAILED</span>  
+
+---------------------------------------------
+
+[ERROR REPORT 0x72-EXIT]
+使用者「PG72」已啟動 <span class="error">SOFT-DISENGAGE PROTOCOL</span>  
+訊號殘留度：17% → 9% → 4%  
+
+---------------------------------------------
+
+[NOTE TO OBSERVERS]
+如果你能看到這裡：  
+你已經走得比其他人更遠。
+
+下一個碎片位置：  
+<span class="gl" data-g="/fragments/3">/fragments/3</span>
+    </div>
+
+    <a class="next" href="/fragments/3">
+      ACCESS NEXT FRAGMENT →
+    </a>
+
+  </div>
+
+  <script>
+    console.log("%c[PG72 LOG]", "color:#6bc5ff;font-size:13px;");
+    console.log("Route confirmed: /fragments/3");
+    console.log("Presence loss accelerating.");
+  </script>
+</body>
+</html>
